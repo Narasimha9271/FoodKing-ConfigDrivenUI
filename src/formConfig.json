@@ -1,0 +1,37 @@
+[
+    {
+        "type": "text",
+        "label": "Username",
+        "name": "username",
+        "validation": {
+            "required": true,
+            "pattern": "^[a-zA-Z0-9]{3,}$"
+        }
+    },
+    {
+        "type": "password",
+        "label": "Password",
+        "name": "password",
+        "validation": {
+            "required": true,
+            "minLength": 6
+        }
+    },
+    {
+        "type": "select",
+        "label": "Role",
+        "name": "role",
+        "options": [
+            { "label": "Admin", "value": "admin" },
+            { "label": "User", "value": "user" }
+        ],
+        "conditional": {
+            "field": "username",
+            "value": "admin"
+        }
+    },
+    {
+        "type": "submit",
+        "label": "Register"
+    }
+]
