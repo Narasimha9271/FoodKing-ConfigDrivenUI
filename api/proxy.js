@@ -8,13 +8,23 @@ export default async (req, res) => {
 
     try {
         const response = await fetch(apiUrl);
+        console.log("Response status:", response.status);
+
         if (!response.ok) {
-            console.error(`Error fetching data: ${response.statusText}`);
-            res.status(response.status).json({ error: response.statusText });
+            const errorText = await response.text();
+            console.error(
+                `Error fetching data: ${response.statusText}`,
+                errorText
+            );
+            res.status(response.status).json({
+                error: response.statusText,
+                details: errorText,
+            });
             return;
         }
+
         const data = await response.json();
-        console.log("Data fetched successfully:", data);
+        console.log("Data fetched successfully");
         res.status(200).json(data);
     } catch (error) {
         console.error("Error:", error);
