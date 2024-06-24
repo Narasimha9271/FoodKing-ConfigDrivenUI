@@ -2,7 +2,7 @@
 
 const CitySelection = ({ cities, selectedCity, onCityChange }) => {
     return (
-        <div className="mb-4 ">
+        <div className=" ml-28 my-4">
             <label
                 htmlFor="city"
                 className="block text-lg font-medium text-gray-700"

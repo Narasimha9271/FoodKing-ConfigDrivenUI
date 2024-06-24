@@ -10,9 +10,10 @@ const useFetchRestaurants = (lat, lng) => {
             setLoading(true);
             try {
                 const response = await fetch(
-                    `/api/proxy?lat=${lat}&lng=${lng}`
+                    `/api/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
                 );
                 const data = await response.json();
+                //console.log(data);
 
                 const restaurantsData =
                     data?.data?.cards[1]?.card?.card?.gridElements
