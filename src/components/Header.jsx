@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 // eslint-disable-next-line react/prop-types
-const Header = ({ isAuthenticated, setIsAuthenticated }) => {
+const Header = ({
+    isAuthenticated,
+    setIsAuthenticated,
+    selectedLanguage,
+    setSelectedLanguage,
+}) => {
     const handleLogout = () => {
         signOut(auth)
             .then(() => {
@@ -12,6 +18,10 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
             .catch((error) => {
                 console.error("Error signing out: ", error);
             });
+    };
+
+    const handleLanguageChange = (e) => {
+        setSelectedLanguage(e.target.value);
     };
 
     return (
@@ -33,13 +43,31 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
                     >
                         About Us
                     </Link>
+                    <Link
+                        to="/help"
+                        className="hover:text-gray-300 transition duration-300"
+                    >
+                        Help
+                    </Link>
                     {isAuthenticated ? (
-                        <button
-                            onClick={handleLogout}
-                            className="hover:text-gray-300 transition duration-300"
-                        >
-                            Logout
-                        </button>
+                        <>
+                            <select
+                                value={selectedLanguage}
+                                onChange={handleLanguageChange}
+                                className="bg-gray-600 text-white border-none outline-none mt-2"
+                            >
+                                <option value="en">English</option>
+                                <option value="tl">Telugu</option>
+                                <option value="hi">Hindi</option>
+                                <option value="ta">Tamil</option>
+                            </select>
+                            <button
+                                onClick={handleLogout}
+                                className="hover:text-gray-300 transition duration-300"
+                            >
+                                Logout
+                            </button>
+                        </>
                     ) : (
                         <>
                             <Link

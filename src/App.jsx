@@ -6,18 +6,23 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Help from "./components/Help";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState("en");
 
     return (
         <Router>
             <Header
                 isAuthenticated={isAuthenticated}
                 setIsAuthenticated={setIsAuthenticated}
+                selectedLanguage={selectedLanguage}
+                setSelectedLanguage={setSelectedLanguage}
             />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/help" element={<Help />} />
                 <Route
                     path="/login"
                     element={<Login setIsAuthenticated={setIsAuthenticated} />}
@@ -31,7 +36,10 @@ const App = () => {
                         <ProtectedRoute isAuthenticated={isAuthenticated} />
                     }
                 >
-                    <Route path="/about" element={<About />} />
+                    <Route
+                        path="/about"
+                        element={<About selectedLanguage={selectedLanguage} />}
+                    />
                 </Route>
             </Routes>
         </Router>
