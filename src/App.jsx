@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Help from "./components/Help";
+import Footer from "./components/Footer";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -42,6 +43,7 @@ const App = () => {
                     />
                 </Route>
             </Routes>
+            <Footer />
         </Router>
     );
 };
