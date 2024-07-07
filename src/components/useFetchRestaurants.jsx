@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useFetchRestaurants = (lat, lng) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -9,10 +10,10 @@ const useFetchRestaurants = (lat, lng) => {
         const fetchRestaurants = async () => {
             setLoading(true);
             try {
-                const response = await fetch(
+                const response = await axios.get(
                     `/api/dapi/restaurants/list/v5?lat=${lat}&lng=${lng}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
                 );
-                const data = await response.json();
+                const data = response.data;
 
                 const restaurantsData =
                     data?.data?.cards[1]?.card?.card?.gridElements
